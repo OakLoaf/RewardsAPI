@@ -1,0 +1,4 @@
+name: RewardsAPI
+version: '${version}'
+main: org.beaconstudios.rewardsapi.RewardsAPI
+api-version: '1.20'

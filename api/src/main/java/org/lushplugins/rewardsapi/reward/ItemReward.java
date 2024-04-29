@@ -1,0 +1,57 @@
+package org.lushplugins.rewardsapi.reward;
+
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.lushplugins.lushlib.utils.SimpleItemStack;
+import org.lushplugins.rewardsapi.util.SchedulerType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@SuppressWarnings("unused")
+public class ItemReward extends Reward implements PlayerReward, LocationReward {
+    private final SimpleItemStack itemStack;
+
+    public ItemReward(SimpleItemStack itemStack) {
+        this.itemStack = itemStack;
+    }
+
+    public ItemReward(@NotNull Map<?, ?> map) {
+        SimpleItemStack itemStack = SimpleItemStack.from(map);
+
+        if (itemStack.getType() != null) {
+            this.itemStack = itemStack;
+        }
+        else {
+            throw new IllegalArgumentException("Invalid config format at '" + map + "'");
+        }
+    }
+
+    @Override
+    public void giveTo(Player player) {
+        HashMap<Integer, ItemStack> droppedItems = player.getInventory().addItem(itemStack.asItemStack(player));
+        droppedItems.values().forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
+    }
+
+    @Override
+    public void giveAt(World world, Location location) {
+        world.dropItem(location, itemStack.asItemStack());
+    }
+
+    @Override
+    public Map<String, Object> asMap() {
+        Map<String, Object> rewardMap = itemStack.asMap();
+
+        rewardMap.put("type", "item");
+
+        return rewardMap;
+    }
+
+    @Override
+    public SchedulerType getSchedulerType() {
+        return SchedulerType.PLAYER;
+    }
+}
