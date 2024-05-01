@@ -18,6 +18,7 @@ import org.lushplugins.rewardsapi.api.reward.LocationReward;
 import org.lushplugins.rewardsapi.api.reward.PlayerReward;
 import org.lushplugins.rewardsapi.api.reward.Reward;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -93,7 +94,14 @@ public class GiveSubCommand extends SubCommand {
 
         @Override
         public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-            return args.length == 2 ? Bukkit.getOnlinePlayers().stream().map(Player::getName).toList() : null;
+            if (args.length == 2) {
+                List<String> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
+                onlinePlayers.add("*");
+
+                return onlinePlayers;
+            }
+
+            return null;
         }
     }
 
