@@ -1,8 +1,10 @@
 package org.lushplugins.rewardsapi;
 
 import org.lushplugins.lushlib.plugin.SpigotPlugin;
+import org.lushplugins.rewardsapi.api.RewardsAPI;
 import org.lushplugins.rewardsapi.command.RewardsAPICommand;
 import org.lushplugins.rewardsapi.config.ConfigManager;
+import org.lushplugins.rewardsapi.reward.ReferenceReward;
 
 public final class RewardsAPIPlugin extends SpigotPlugin {
     private static RewardsAPIPlugin plugin;
@@ -12,6 +14,7 @@ public final class RewardsAPIPlugin extends SpigotPlugin {
     @Override
     public void onLoad() {
         plugin = this;
+        RewardsAPI.getInstance().registerRewardType("reference", ReferenceReward::new);
     }
 
     @Override
