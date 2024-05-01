@@ -11,6 +11,7 @@ public class RewardsAPICommand extends Command {
     public RewardsAPICommand() {
         super("rewardsapi");
         addSubCommand(new GiveSubCommand());
+        addSubCommand(new ReloadSubCommand());
     }
 
     @Override
