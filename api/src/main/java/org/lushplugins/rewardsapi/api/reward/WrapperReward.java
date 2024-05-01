@@ -1,4 +1,4 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
 import java.util.Collections;
 import java.util.List;

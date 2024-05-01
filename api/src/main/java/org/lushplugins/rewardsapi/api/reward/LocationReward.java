@@ -1,4 +1,4 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
 import org.bukkit.Location;
 import org.bukkit.World;

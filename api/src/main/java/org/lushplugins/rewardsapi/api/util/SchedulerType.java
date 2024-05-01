@@ -1,4 +1,4 @@
-package org.lushplugins.rewardsapi.util;
+package org.lushplugins.rewardsapi.api.util;
 
 public enum SchedulerType {
     ASYNC,

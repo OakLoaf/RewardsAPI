@@ -1,9 +1,9 @@
-package org.lushplugins.rewardsapi;
+package org.lushplugins.rewardsapi.api;
 
-import org.lushplugins.rewardsapi.hook.FloodgateHook;
-import org.lushplugins.rewardsapi.hook.HookId;
-import org.lushplugins.rewardsapi.reward.Reward;
-import org.lushplugins.rewardsapi.reward.RewardTypes;
+import org.lushplugins.rewardsapi.api.hook.FloodgateHook;
+import org.lushplugins.rewardsapi.api.hook.HookId;
+import org.lushplugins.rewardsapi.api.reward.Reward;
+import org.lushplugins.rewardsapi.api.reward.RewardTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

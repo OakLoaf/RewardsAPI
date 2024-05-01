@@ -1,6 +1,6 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
-import org.lushplugins.rewardsapi.util.SchedulerType;
+import org.lushplugins.rewardsapi.api.util.SchedulerType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

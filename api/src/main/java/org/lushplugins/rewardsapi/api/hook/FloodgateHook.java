@@ -1,4 +1,4 @@
-package org.lushplugins.rewardsapi.hook;
+package org.lushplugins.rewardsapi.api.hook;
 
 import org.lushplugins.lushlib.hook.Hook;
 import org.geysermc.floodgate.api.FloodgateApi;

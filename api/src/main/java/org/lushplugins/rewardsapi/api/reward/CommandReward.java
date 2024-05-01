@@ -1,11 +1,11 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
 import me.dave.chatcolorhandler.ChatColorHandler;
 import me.dave.chatcolorhandler.parsers.custom.PlaceholderAPIParser;
 import org.lushplugins.lushlib.hook.Hook;
-import org.lushplugins.rewardsapi.RewardsAPI;
-import org.lushplugins.rewardsapi.hook.FloodgateHook;
-import org.lushplugins.rewardsapi.hook.HookId;
+import org.lushplugins.rewardsapi.api.RewardsAPI;
+import org.lushplugins.rewardsapi.api.hook.FloodgateHook;
+import org.lushplugins.rewardsapi.api.hook.HookId;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

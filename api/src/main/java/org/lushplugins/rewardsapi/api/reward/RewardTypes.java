@@ -1,4 +1,4 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
 import org.lushplugins.lushlib.manager.Manager;
 

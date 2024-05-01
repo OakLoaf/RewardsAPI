@@ -1,10 +1,10 @@
-package org.lushplugins.rewardsapi.reward;
+package org.lushplugins.rewardsapi.api.reward;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.lushplugins.lushlib.utils.RandomCollection;
-import org.lushplugins.rewardsapi.RewardsAPI;
-import org.lushplugins.rewardsapi.util.SchedulerType;
+import org.lushplugins.rewardsapi.api.RewardsAPI;
+import org.lushplugins.rewardsapi.api.util.SchedulerType;
 import org.bukkit.entity.Player;
 
 import java.util.*;
