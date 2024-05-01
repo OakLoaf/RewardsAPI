@@ -13,9 +13,9 @@ import java.util.Map;
 
 public abstract class Reward implements Cloneable {
 
-    public abstract SchedulerType getSchedulerType();
-
     public abstract Map<String, Object> asMap();
+
+    public abstract SchedulerType getSchedulerType();
 
     public void give(Player player) {
         if (this instanceof PlayerReward playerReward) {
