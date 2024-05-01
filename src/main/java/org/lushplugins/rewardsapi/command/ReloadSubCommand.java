@@ -17,7 +17,7 @@ public class ReloadSubCommand extends SubCommand {
     public boolean execute(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         try {
             RewardsAPIPlugin.getInstance().getConfigManager().reload();
-            ChatColorHandler.sendMessage(sender, "&#66b04fSuccessfully reloaded RewardsAPI");
+            ChatColorHandler.sendMessage(sender, "&#b7faa2Successfully reloaded RewardsAPI");
         } catch (Exception e) {
             ChatColorHandler.sendMessage(sender, "&#ff6969Something went wrong whilst reloading the config - check the console for errors.");
         }
