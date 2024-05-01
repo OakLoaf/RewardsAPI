@@ -46,39 +46,46 @@ public class GiveSubCommand extends SubCommand {
         public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
             String rewardName = args[0];
 
-            Reward reward = RewardsAPIPlugin.getInstance().getConfigManager().getReward(rewardName);
-            if (reward == null) {
+            List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);
+            if (rewards.isEmpty()) {
                 ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "reward"));
                 return true;
             }
 
-            if (reward instanceof PlayerReward playerReward) {
-                Collection<? extends Player> players;
-                if (args.length >= 3) {
-                    if (args[2].equalsIgnoreCase("*")) {
-                        players = Bukkit.getOnlinePlayers();
-                    } else {
-                        Player player = Bukkit.getPlayer(args[2]);
-                        if (player == null) {
-                            ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
-                            return true;
-                        }
-
-                        players = List.of(player);
-                    }
+            Collection<? extends Player> players;
+            if (args.length >= 3) {
+                if (args[2].equalsIgnoreCase("*")) {
+                    players = Bukkit.getOnlinePlayers();
                 } else {
-                    if (sender instanceof Player player) {
-                        players = List.of(player);
-                    } else {
+                    Player player = Bukkit.getPlayer(args[2]);
+                    if (player == null) {
                         ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
                         return true;
                     }
-                }
 
-                players.forEach(playerReward::giveTo);
-                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("reward-given", "Reward '%reward%' has been given").replace("%reward%", rewardName));
+                    players = List.of(player);
+                }
             } else {
-                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "generic"));
+                if (sender instanceof Player player) {
+                    players = List.of(player);
+                } else {
+                    ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
+                    return true;
+                }
+            }
+
+            boolean given = false;
+            for (Reward reward : rewards) {
+                if (reward instanceof PlayerReward playerReward) {
+                    players.forEach(playerReward::giveTo);
+                    given = true;
+                } else {
+                    ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "generic"));
+                }
+            }
+
+            if (given) {
+                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("reward-given", "Reward '%reward%' has been given").replace("%reward%", rewardName));
             }
 
             return true;
@@ -86,7 +93,7 @@ public class GiveSubCommand extends SubCommand {
 
         @Override
         public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-            return args.length == 1 ? Bukkit.getOnlinePlayers().stream().map(Player::getName).toList() : null;
+            return args.length == 2 ? Bukkit.getOnlinePlayers().stream().map(Player::getName).toList() : null;
         }
     }
 
@@ -101,36 +108,43 @@ public class GiveSubCommand extends SubCommand {
         public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
             String rewardName = args[0];
 
-            Reward reward = RewardsAPIPlugin.getInstance().getConfigManager().getReward(rewardName);
-            if (reward == null) {
+            List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);
+            if (rewards.isEmpty()) {
                 ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "reward"));
                 return true;
             }
 
             World world;
             Location location;
-            if (reward instanceof LocationReward locationReward) {
-                if (args.length >= 5) {
-                    world = Bukkit.getWorld(args[1]);
-                    double x = Double.parseDouble(args[2]);
-                    double y = Double.parseDouble(args[3]);
-                    double z = Double.parseDouble(args[4]);
+            if (args.length >= 5) {
+                world = Bukkit.getWorld(args[1]);
+                double x = Double.parseDouble(args[2]);
+                double y = Double.parseDouble(args[3]);
+                double z = Double.parseDouble(args[4]);
 
-                    location = new Location(world, x, y, z);
-                } else {
-                    if (sender instanceof Player player) {
-                        world = player.getWorld();
-                        location = player.getLocation();
-                    } else {
-                        ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
-                        return true;
-                    }
-                }
-
-                locationReward.giveAt(world, location);
-                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("reward-given", "Reward '%reward%' has been given").replace("%reward%", rewardName));
+                location = new Location(world, x, y, z);
             } else {
-                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "location"));
+                if (sender instanceof Player player) {
+                    world = player.getWorld();
+                    location = player.getLocation();
+                } else {
+                    ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
+                    return true;
+                }
+            }
+
+            boolean given = false;
+            for (Reward reward : rewards ) {
+                if (reward instanceof LocationReward locationReward) {
+                    locationReward.giveAt(world, location);
+                    given = true;
+                } else {
+                    ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "location"));
+                }
+            }
+
+            if (given) {
+                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("reward-given", "Reward '%reward%' has been given").replace("%reward%", rewardName));
             }
 
             return true;
@@ -192,17 +206,24 @@ public class GiveSubCommand extends SubCommand {
         public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
             String rewardName = args[0];
 
-            Reward reward = RewardsAPIPlugin.getInstance().getConfigManager().getReward(rewardName);
-            if (reward == null) {
+            List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);
+            if (rewards.isEmpty()) {
                 ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "reward"));
                 return true;
             }
 
-            if (reward instanceof GenericReward genericReward) {
-                genericReward.give();
+            boolean given = false;
+            for (Reward reward : rewards) {
+                if (reward instanceof GenericReward genericReward) {
+                    genericReward.give();
+                    given = true;
+                } else {
+                    ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "generic"));
+                }
+            }
+
+            if (given) {
                 ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("reward-given", "Reward '%reward%' has been given").replace("%reward%", rewardName));
-            } else {
-                ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-reward-type", "Invalid reward type specified").replace("%reward-type%", "generic"));
             }
 
             return true;
