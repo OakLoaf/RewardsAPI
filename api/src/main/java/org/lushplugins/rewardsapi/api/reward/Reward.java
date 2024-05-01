@@ -1,5 +1,6 @@
 package org.lushplugins.rewardsapi.api.reward;
 
+import org.jetbrains.annotations.NotNull;
 import org.lushplugins.rewardsapi.api.RewardsAPI;
 import org.lushplugins.rewardsapi.api.util.SchedulerType;
 import org.bukkit.configuration.ConfigurationSection;
@@ -26,6 +27,7 @@ public abstract class Reward implements Cloneable {
         }
     }
 
+    @Nullable
     public static Reward loadReward(ConfigurationSection configurationSection) {
         return loadReward(configurationSection.getValues(true), configurationSection.getCurrentPath());
     }
@@ -48,7 +50,12 @@ public abstract class Reward implements Cloneable {
         }
     }
 
-    @Nullable
+    @NotNull
+    public static List<Reward> loadRewards(ConfigurationSection configurationSection, String path) {
+        return loadRewards(configurationSection.getMapList(path), configurationSection.getCurrentPath());
+    }
+
+    @NotNull
     public static List<Reward> loadRewards(List<Map<?, ?>> maps, String path) {
         List<Reward> rewardList = new ArrayList<>();
 
@@ -59,7 +66,7 @@ public abstract class Reward implements Cloneable {
             }
         });
 
-        return !rewardList.isEmpty() ? rewardList : null;
+        return !rewardList.isEmpty() ? rewardList : new ArrayList<>();
     }
 
     @Override
