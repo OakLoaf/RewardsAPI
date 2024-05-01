@@ -1,0 +1,9 @@
+gold-16:
+  type: item
+  material: gold_ingot
+  amount: 16
+
+announce-player:
+  type: command
+  commands:
+    - say Congratulations %player%!

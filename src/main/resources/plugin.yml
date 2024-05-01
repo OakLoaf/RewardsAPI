@@ -1,4 +1,10 @@
-name: RewardsAPI
+name: RewardsAPIPlugin
 version: '${version}'
-main: org.beaconstudios.rewardsapi.RewardsAPI
+main: org.lushplugins.rewardsapi.RewardsAPIPlugin
 api-version: '1.20'
+softdepend:
+  - floodgate
+  - PlaceholderAPI
+commands:
+  rewardsapi:
+    usage: /rewardsapi

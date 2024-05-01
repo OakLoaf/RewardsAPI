@@ -1,0 +1,3 @@
+reward-given: "&#b7faa2Reward '&#66b04f%reward%&#b7faa2' has been given"
+invalid-reward-type: "&#ff6969This reward cannot be given to a %reward-type%"
+invalid-arg: "&#ff6969Invalid %arg% specified"
