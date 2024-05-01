@@ -20,7 +20,9 @@ allprojects {
 }
 
 dependencies {
+    // The below should be passed from the api (unsure why they are not)
     compileOnly("org.spigotmc:spigot:${findProperty("minecraftVersion")}-R0.1-SNAPSHOT")
+    compileOnly("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
 
     implementation(project(":api"))
 }

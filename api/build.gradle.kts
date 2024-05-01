@@ -17,7 +17,7 @@ tasks {
     }
 
     shadowJar {
-        relocate("me.dave.lushlib", "org.lushplugins.rewardsapi.libraries.lushlib")
+        relocate("org.lushplugins.lushlib", "org.lushplugins.rewardsapi.libraries.lushlib")
 
         minimize()
 
