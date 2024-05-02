@@ -54,11 +54,11 @@ public class GiveSubCommand extends SubCommand {
             }
 
             Collection<? extends Player> players;
-            if (args.length >= 3) {
-                if (args[2].equalsIgnoreCase("*")) {
+            if (args.length >= 2) {
+                if (args[1].equalsIgnoreCase("*")) {
                     players = Bukkit.getOnlinePlayers();
                 } else {
-                    Player player = Bukkit.getPlayer(args[2]);
+                    Player player = Bukkit.getPlayer(args[1]);
                     if (player == null) {
                         ChatColorHandler.sendMessage(sender, RewardsAPIPlugin.getInstance().getConfigManager().getMessage("invalid-arg", "Invalid %arg% specified").replace("%arg%", "player"));
                         return true;
