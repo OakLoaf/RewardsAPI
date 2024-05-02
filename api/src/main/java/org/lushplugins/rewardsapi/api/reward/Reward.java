@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public abstract class Reward implements Cloneable {
 
@@ -45,7 +46,7 @@ public abstract class Reward implements Cloneable {
         try {
             return rewardTypes.loadRewardOfType(rewardType, rewardMap);
         } catch (IllegalArgumentException e) {
-            RewardsAPI.getInstance().getLogger().warning(e.getCause().getMessage());
+            RewardsAPI.getInstance().getLogger().log(Level.WARNING, "Failed to load reward type:", e);
             return null;
         }
     }
