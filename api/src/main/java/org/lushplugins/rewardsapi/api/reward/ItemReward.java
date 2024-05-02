@@ -32,13 +32,13 @@ public class ItemReward extends Reward implements PlayerReward, LocationReward {
 
     @Override
     public void giveTo(Player player) {
-        HashMap<Integer, ItemStack> droppedItems = player.getInventory().addItem(itemStack.asItemStack(player));
+        HashMap<Integer, ItemStack> droppedItems = player.getInventory().addItem(itemStack.asItemStack(player, true));
         droppedItems.values().forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
     }
 
     @Override
     public void giveAt(World world, Location location) {
-        world.dropItem(location, itemStack.asItemStack());
+        world.dropItem(location, itemStack.asItemStack(null, true));
     }
 
     @Override
