@@ -37,6 +37,14 @@ public class RandomReward extends Reward implements PlayerReward, LocationReward
         });
     }
 
+    public Reward getRandomReward() {
+        if (rewards != null && !rewards.isEmpty()) {
+            return rewards.next();
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public void giveTo(Player player) {
         if (rewards != null && !rewards.isEmpty()) {
