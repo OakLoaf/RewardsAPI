@@ -8,7 +8,7 @@ allprojects {
     apply(plugin="java")
 
     group = "org.lushplugins"
-    version = "0.2.4"
+    version = "0.2.5"
 
     repositories {
         mavenCentral()
@@ -34,8 +34,11 @@ allprojects {
 dependencies {
     // The below should be passed from the api (unsure why they are not)
     compileOnly("org.spigotmc:spigot:${findProperty("minecraftVersion")}-R0.1-SNAPSHOT")
-    compileOnly("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
 
+    // Libraries
+    implementation("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
+
+    // Projects
     implementation(project(":api"))
 }
 
@@ -45,6 +48,8 @@ tasks {
     }
 
     shadowJar {
+        relocate("org.lushplugins.lushlib", "org.lushplugins.rewardsapi.libs.lushlib")
+
         minimize()
 
         val folder = System.getenv("pluginFolder_1-20")

@@ -1,9 +1,9 @@
 package org.lushplugins.rewardsapi.reward;
 
-import me.dave.chatcolorhandler.ChatColorHandler;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.lushplugins.lushlib.libraries.chatcolor.ChatColorHandler;
 import org.lushplugins.rewardsapi.RewardsAPIPlugin;
 import org.lushplugins.rewardsapi.api.reward.GenericReward;
 import org.lushplugins.rewardsapi.api.reward.LocationReward;

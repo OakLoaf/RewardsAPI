@@ -1,6 +1,6 @@
 package org.lushplugins.rewardsapi.api.reward;
 
-import me.dave.chatcolorhandler.ChatColorHandler;
+import org.lushplugins.lushlib.libraries.chatcolor.ChatColorHandler;
 import org.lushplugins.rewardsapi.api.util.SchedulerType;
 import org.bukkit.Location;
 import org.bukkit.World;

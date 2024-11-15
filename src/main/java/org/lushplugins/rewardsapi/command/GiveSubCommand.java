@@ -1,6 +1,5 @@
 package org.lushplugins.rewardsapi.command;
 
-import me.dave.chatcolorhandler.ChatColorHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -12,6 +11,7 @@ import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lushplugins.lushlib.command.SubCommand;
+import org.lushplugins.lushlib.libraries.chatcolor.ChatColorHandler;
 import org.lushplugins.rewardsapi.RewardsAPIPlugin;
 import org.lushplugins.rewardsapi.api.reward.GenericReward;
 import org.lushplugins.rewardsapi.api.reward.LocationReward;
@@ -32,7 +32,7 @@ public class GiveSubCommand extends SubCommand {
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
         return true;
     }
 
@@ -44,7 +44,7 @@ public class GiveSubCommand extends SubCommand {
         }
 
         @Override
-        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
             String rewardName = args[0];
 
             List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);
@@ -93,7 +93,7 @@ public class GiveSubCommand extends SubCommand {
         }
 
         @Override
-        public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
             if (args.length == 2) {
                 List<String> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
                 onlinePlayers.add("*");
@@ -113,7 +113,7 @@ public class GiveSubCommand extends SubCommand {
         }
 
         @Override
-        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
             String rewardName = args[0];
 
             List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);
@@ -159,7 +159,7 @@ public class GiveSubCommand extends SubCommand {
         }
 
         @Override
-        public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public @Nullable List<String> tabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
             switch (args.length) {
                 case 2 -> {
                     return Bukkit.getWorlds().stream().map(World::getName).toList();
@@ -211,7 +211,7 @@ public class GiveSubCommand extends SubCommand {
         }
 
         @Override
-        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public boolean execute(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
             String rewardName = args[0];
 
             List<Reward> rewards = RewardsAPIPlugin.getInstance().getConfigManager().getRewards(rewardName);

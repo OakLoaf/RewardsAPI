@@ -20,7 +20,7 @@ public class ItemReward extends Reward implements PlayerReward, LocationReward {
     }
 
     public ItemReward(@NotNull Map<?, ?> map) {
-        SimpleItemStack itemStack = SimpleItemStack.from(map);
+        SimpleItemStack itemStack = new SimpleItemStack(map);
 
         if (itemStack.getType() != null) {
             this.itemStack = itemStack;

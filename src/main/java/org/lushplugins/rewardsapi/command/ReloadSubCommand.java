@@ -1,10 +1,10 @@
 package org.lushplugins.rewardsapi.command;
 
-import me.dave.chatcolorhandler.ChatColorHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.lushplugins.lushlib.command.SubCommand;
+import org.lushplugins.lushlib.libraries.chatcolor.ChatColorHandler;
 import org.lushplugins.rewardsapi.RewardsAPIPlugin;
 
 import java.util.logging.Level;
@@ -16,7 +16,7 @@ public class ReloadSubCommand extends SubCommand {
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args, @NotNull String[] allArgs) {
         try {
             RewardsAPIPlugin.getInstance().getConfigManager().reload();
             ChatColorHandler.sendMessage(sender, "&#b7faa2Successfully reloaded RewardsAPI");
