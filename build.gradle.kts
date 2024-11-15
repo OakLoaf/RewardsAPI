@@ -11,11 +11,11 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
-        maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot
-        maven(url = "https://repo.lushplugins.org/releases/") // ChatColorHandler
-        maven(url = "https://repo.lushplugins.org/snapshots/") // LushLib
-        maven(url = "https://repo.opencollab.dev/main/") // Floodgate
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot
+        maven("https://repo.lushplugins.org/releases/") // ChatColorHandler
+        maven("https://repo.lushplugins.org/snapshots/") // LushLib
+        maven("https://repo.opencollab.dev/main/") // Floodgate
     }
 }
 
