@@ -22,6 +22,10 @@ public class PermissionReward extends WrapperReward implements PlayerReward {
         permission = (String) map.get("permission");
     }
 
+    public boolean hasPermission(Player player) {
+        return player.hasPermission(permission);
+    }
+
     @Override
     public void giveTo(Player player) {
         if (player.hasPermission(permission)) {
