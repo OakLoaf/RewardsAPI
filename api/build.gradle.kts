@@ -28,7 +28,7 @@ tasks {
 publishing {
     repositories {
         maven {
-            name = "smrt1Releases"
+            name = "lushReleases"
             url = uri("https://repo.lushplugins.org/releases")
             credentials(PasswordCredentials::class)
             authentication {
@@ -38,7 +38,7 @@ publishing {
         }
 
         maven {
-            name = "smrt1Snapshots"
+            name = "lushSnapshots"
             url = uri("https://repo.lushplugins.org/snapshots")
             credentials(PasswordCredentials::class)
             authentication {
