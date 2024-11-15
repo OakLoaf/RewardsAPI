@@ -13,8 +13,8 @@ allprojects {
         mavenLocal()
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
         maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot
-        maven(url = "https://repo.smrt-1.com/releases/") // ChatColorHandler
-        maven(url = "https://repo.smrt-1.com/snapshots/") // LushLib
+        maven(url = "https://repo.lushplugins.org/releases/") // ChatColorHandler
+        maven(url = "https://repo.lushplugins.org/snapshots/") // LushLib
         maven(url = "https://repo.opencollab.dev/main/") // Floodgate
     }
 }
