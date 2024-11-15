@@ -5,6 +5,8 @@ plugins {
 }
 
 allprojects {
+    apply(plugin="java")
+
     group = "org.lushplugins"
     version = "0.2.3"
 
@@ -17,6 +19,16 @@ allprojects {
         maven("https://repo.lushplugins.org/snapshots/") // LushLib
         maven("https://repo.opencollab.dev/main/") // Floodgate
     }
+
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+
+        registerFeature("optional") {
+            usingSourceSet(sourceSets["main"])
+        }
+
+        withSourcesJar()
+    }
 }
 
 dependencies {
@@ -25,10 +37,6 @@ dependencies {
     compileOnly("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
 
     implementation(project(":api"))
-}
-
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 tasks {
