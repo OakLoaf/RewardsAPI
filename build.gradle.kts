@@ -20,7 +20,7 @@ allprojects {
     apply(plugin="com.github.johnrengelman.shadow")
 
     group = "org.lushplugins"
-    version = "0.2.6"
+    version = "0.2.7"
 
     repositories {
         mavenCentral()
