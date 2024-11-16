@@ -9,6 +9,7 @@ import java.util.function.Function;
 public class RewardTypes extends Manager {
     public static final String BROADCAST = "broadcast";
     public static final String CONSOLE_COMMAND = "command";
+    public static final String EMPTY = "empty";
     public static final String ITEM = "item";
     public static final String MESSAGE = "message";
     public static final String PERMISSION = "permission";
@@ -23,6 +24,7 @@ public class RewardTypes extends Manager {
 
         register(BROADCAST, BroadcastReward::new);
         register(CONSOLE_COMMAND, ConsoleCommandReward::new);
+        register(EMPTY, EmptyReward::new);
         register(ITEM, ItemReward::new);
         register(MESSAGE, MessageReward::new);
         register(PERMISSION, PermissionReward::new);
