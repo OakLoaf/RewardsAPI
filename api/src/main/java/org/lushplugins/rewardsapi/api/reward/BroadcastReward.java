@@ -13,7 +13,7 @@ import java.util.Map;
 public class BroadcastReward extends Reward implements PlayerReward, LocationReward, GenericReward {
     private final String message;
 
-    public  BroadcastReward(String message) {
+    public BroadcastReward(String message) {
         this.message = message;
     }
 
