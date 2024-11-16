@@ -2,8 +2,8 @@ package org.lushplugins.rewardsapi.api.reward;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.lushplugins.lushlib.utils.RandomCollection;
 import org.lushplugins.rewardsapi.api.RewardsAPI;
+import org.lushplugins.rewardsapi.api.util.RandomCollection;
 import org.lushplugins.rewardsapi.api.util.SchedulerType;
 import org.bukkit.entity.Player;
 
@@ -35,6 +35,10 @@ public class RandomReward extends Reward implements PlayerReward, LocationReward
                 rewards.add(reward, weight);
             }
         });
+    }
+
+    public RandomCollection<Reward> getRewards() {
+        return rewards;
     }
 
     public Reward getRandomReward() {
