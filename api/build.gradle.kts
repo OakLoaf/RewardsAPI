@@ -1,7 +1,5 @@
 plugins {
-    id("java")
     id("maven-publish")
-    id("com.github.johnrengelman.shadow") version("8.1.1")
 }
 
 dependencies {
@@ -9,20 +7,6 @@ dependencies {
     compileOnly("org.geysermc.floodgate:api:${findProperty("floodgateVersion")}-SNAPSHOT")
 
     implementation("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
-}
-
-tasks {
-    withType<JavaCompile> {
-        options.encoding = "UTF-8"
-    }
-
-    shadowJar {
-        relocate("org.lushplugins.lushlib", "org.lushplugins.rewardsapi.libs.lushlib")
-
-        minimize()
-
-        archiveFileName.set("${rootProject.name}-${project.name}-${project.version}.jar")
-    }
 }
 
 publishing {

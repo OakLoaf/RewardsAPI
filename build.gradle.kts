@@ -1,11 +1,23 @@
 plugins {
     id("java")
-    id("maven-publish")
     id("com.github.johnrengelman.shadow") version("8.1.1")
 }
 
+dependencies {
+    // The below should be passed from the api (unsure why they are not)
+    compileOnly("org.spigotmc:spigot:${findProperty("minecraftVersion")}-R0.1-SNAPSHOT")
+
+    // Libraries
+    implementation("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
+
+    // Projects
+    implementation(project(":api"))
+}
+
+
 allprojects {
     apply(plugin="java")
+    apply(plugin="com.github.johnrengelman.shadow")
 
     group = "org.lushplugins"
     version = "0.2.6"
@@ -29,40 +41,27 @@ allprojects {
 
         withSourcesJar()
     }
-}
 
-dependencies {
-    // The below should be passed from the api (unsure why they are not)
-    compileOnly("org.spigotmc:spigot:${findProperty("minecraftVersion")}-R0.1-SNAPSHOT")
+    tasks {
+        withType<JavaCompile> {
+            options.encoding = "UTF-8"
+        }
 
-    // Libraries
-    implementation("org.lushplugins:LushLib:${findProperty("lushlibVersion")}")
+        shadowJar {
+            relocate("org.lushplugins.lushlib", "org.lushplugins.rewardsapi.libs.lushlib")
 
-    // Projects
-    implementation(project(":api"))
-}
+            minimize()
 
-tasks {
-    withType<JavaCompile> {
-        options.encoding = "UTF-8"
-    }
+            archiveFileName.set("${project.name}-${project.version}.jar")
+        }
 
-    shadowJar {
-        relocate("org.lushplugins.lushlib", "org.lushplugins.rewardsapi.libs.lushlib")
+        processResources{
+            expand(project.properties)
 
-        minimize()
-
-        val folder = System.getenv("pluginFolder_1-20")
-        if (folder != null) destinationDirectory.set(file(folder))
-        archiveFileName.set("${project.name}-${project.version}.jar")
-    }
-
-    processResources{
-        expand(project.properties)
-
-        inputs.property("version", rootProject.version)
-        filesMatching("plugin.yml") {
-            expand("version" to rootProject.version)
+            inputs.property("version", rootProject.version)
+            filesMatching("plugin.yml") {
+                expand("version" to rootProject.version)
+            }
         }
     }
 }
